@@ -50,11 +50,43 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.1.0-beta3-build1069\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.1.0-beta3-build1069\build\net20\xunit.runner.visualstudio.props'))" />
+  </Target>
   <ItemGroup>
-    <Compile Include="Library1.fs" />
     <None Include="Script.fsx" />
     <Content Include="packages.config" />
-    <None Include="all-vs2013.sln" />
+    <Compile Include="Collections\local.fs" />
+    <Compile Include="Collections\array2.fs" />
+    <Compile Include="Collections\option.fs" />
+    <Compile Include="Collections\collections.fs" />
+    <Compile Include="Collections\seq.fs" />
+    <Compile Include="Collections\string.fs" />
+    <Compile Include="Collections\list.fs" />
+    <Compile Include="Collections\array.fs" />
+    <Compile Include="Collections\array3.fs" />
+    <Compile Include="Collections\map.fs" />
+    <Compile Include="Collections\set.fs" />
+    <Compile Include="Primitives\prim-types-prelude.fs" />
+    <Compile Include="Primitives\SR.fs" />
+    <Compile Include="Primitives\prim-types.fs" />
+    <Compile Include="Reflection\reflect.fs" />
+    <Compile Include="Event\event.fs" />
+    <Compile Include="Numerics\n.fs" />
+    <Compile Include="Numerics\z.fs" />
+    <Compile Include="Printf\sformat.fs" />
+    <Compile Include="Printf\printf.fs" />
+    <Compile Include="Quotations\quotations.fs" />
+    <Compile Include="NativeInterop\nativeptr.fs" />
+    <Compile Include="Aysnc\control.fs" />
+    <Compile Include="Queries\Linq.fs" />
+    <Compile Include="Queries\QueryExtensions.fs" />
+    <Compile Include="Queries\Query.fs" />
+    <Compile Include="Units\SI.fs" />
+    <Compile Include="Extras\fslib-extra-pervasives.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FsCheck">
@@ -82,12 +114,6 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.1.0-beta3-build1069\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.1.0-beta3-build1069\build\net20\xunit.runner.visualstudio.props'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
