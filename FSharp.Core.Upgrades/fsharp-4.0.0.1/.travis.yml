@@ -1,0 +1,12 @@
+language: csharp
+
+install:
+
+script: 
+  - ./autogen.sh   --prefix=/usr
+  - make 
+  - sudo make install
+  - xbuild ./src/fsharp-library-unittests-build.proj /p:TargetFramework=net40 /p:Configuration=Release
+  - (cd tests/projects; ./build.sh)
+  - (cd tests/fsharp/core; ./run-opt.sh)
+

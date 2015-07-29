@@ -1,0 +1,12 @@
+NAME=fsc-proto
+ASSEMBLY = $(NAME).exe
+
+srcdir := @abs_srcdir@/
+
+include @abs_top_builddir@/config.make
+
+build-proto:
+	MONO_ENV_OPTIONS=$(monoopts) xbuild /p:Configuration=Proto
+	chmod +x $(protodir)fsc-proto.exe
+
+include $(topdir)/src/fsharp/targets.make

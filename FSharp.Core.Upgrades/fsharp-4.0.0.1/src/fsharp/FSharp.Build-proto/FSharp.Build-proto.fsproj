@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) Microsoft Open Technologies, Inc.  All Rights Reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information. -->
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <FSharpSourcesRoot>$(MSBuildProjectDirectory)\..\..</FSharpSourcesRoot>
+    <Configuration Condition=" '$(Configuration)' == '' ">Proto</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+  </PropertyGroup>
+  <Import Project="$(FSharpSourcesRoot)\FSharpSource.Settings.targets" />
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AssemblyName>FSharp.Build-proto</AssemblyName>
+    <AllowCrossTargeting>true</AllowCrossTargeting>
+    <DefineConstants>BUILDING_WITH_LKG;$(DefineConstants)</DefineConstants>
+    <BuildWith>LKG</BuildWith>
+    <ProjectGuid>{D8BC791F-C1A9-49DC-9432-0F3090537555}</ProjectGuid>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <!-- MonoDevelop likes these here to recognise the configurations -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
+  <ItemGroup>
+	  <FsSrGen Include="..\FSharp.Build\FSBuild.txt">
+		  <Link>FSBuild.txt</Link>
+	  </FsSrGen>
+    <Compile Include="..\..\utils\CompilerLocationUtils.fs">
+      <Link>CompilerLocationUtils.fs</Link>
+    </Compile>
+    <Compile Include="..\FSharp.Build\CreateFSharpManifestResourceName.fsi">
+       <Link>CreateFSharpManifestResourceName.fsi</Link>
+    </Compile>
+    <Compile Include="..\FSharp.Build\CreateFSharpManifestResourceName.fs" >
+       <Link>CreateFSharpManifestResourceName.fs</Link>
+    </Compile>
+
+    <Compile Include="..\FSharp.Build\Fsc.fsi">
+      <Link>Fsc.fsi</Link>
+    </Compile>
+    <Compile Include="..\FSharp.Build\Fsc.fs">
+      <Link>Fsc.fs</Link>
+    </Compile>
+    <Content Include="Microsoft.FSharp-proto.targets">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="FSharp.Core">
+      <HintPath>$(FSharpSourcesRoot)\..\lib\bootstrap\4.0\FSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="Microsoft.Build.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.Build.Engine, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.Build, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.Build.Utilities.v4.0" />
+    <Reference Include="Microsoft.Build.Tasks.v4.0" />
+    <Reference Include="Microsoft.Build.Framework"/>
+    <Reference Include="Microsoft.Build.Engine" />
+    <Reference Include="Microsoft.Build"/>
+    <Reference Include="Microsoft.Build.Utilities.v4.0"/>
+    <Reference Include="Microsoft.Build.Tasks.v4.0"/>
+  </ItemGroup>
+  <Import Project="$(FSharpSourcesRoot)\FSharpSource.targets" />
+</Project>

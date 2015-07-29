@@ -1,0 +1,14 @@
+NAME=fsiAnyCpu
+ASSEMBLY = $(NAME).exe
+TOKEN=$(SIGN_TOKEN)
+
+srcdir := @abs_srcdir@/
+
+include @abs_top_builddir@/config.make
+
+include $(topdir)/src/fsharp/targets.make
+
+install: install-bin
+
+
+

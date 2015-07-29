@@ -1,0 +1,13 @@
+os: Windows Server 2012 R2
+init:
+  - git config --global core.autocrlf input
+build_script:
+  - cmd: build.bat
+  - ps: .\appveyor.ps1
+test: off
+version: '{build}'
+artifacts:
+  - path: lib\release
+    name: release
+  - path: FSharp.Core.Nuget\*.nupkg
+  - path: FSharp.Compiler.Tools.Nuget\*.nupkg
